@@ -1,5 +1,6 @@
 const express = require("express");
-const router = express.router()
+const router = express.Router()
+const menue = require("../model/menue")
 
 router.get("/menue", async (req, res) => {
   try {
@@ -10,6 +11,8 @@ router.get("/menue", async (req, res) => {
     return res.status(500).json("Internal Server error");
   }
 });
+
+
 
 router.post("/menue", async (req, res) => {
   try {
@@ -22,3 +25,5 @@ router.post("/menue", async (req, res) => {
     return res.status(500).json("Internal Server error");
   }
 });
+
+module.exports = router

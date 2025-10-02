@@ -1,5 +1,6 @@
 const express = require("express")
-const router = express.router()
+const router = express.Router()
+const Person = require("../model/Person")
 
 router.get("/getPerson", async (req, res) => {
   try {
@@ -26,7 +27,7 @@ router.get("/getPerson/:type", async (req, res) => {
   }
 });
 
-router.post("/save", async (req, res) => {
+router.post("/savePerson", async (req, res) => {
   try {
     const data = req.body; // Request body will contain Person's data
 
@@ -41,3 +42,22 @@ router.post("/save", async (req, res) => {
     res.status(500).json("Internal Server Error");
   }
 });
+
+router.put("/updatePerson/:id" , async(req , res)=>{
+    try {
+        const personId = req.params.id ; // extract id from url parameter
+        
+        const updatedData = req.body ; // send updated person data in the request
+
+        const response = await Person.findByIdAndUpdate(personId , updatedData , {
+            new :true , // returun the updated person as a response
+            runValidators : true // do mogoose validation
+        })
+
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({error:"Internal Server Error"})
+    }
+})
+
+module.exports = router
