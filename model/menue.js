@@ -7,6 +7,7 @@ const menueSchema = new Schema({
         type: String,
         require : true
     },
+   
     variety : {
         type: String , 
         enum : ["veg" , "non-veg"],
