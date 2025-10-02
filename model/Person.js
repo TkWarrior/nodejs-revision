@@ -24,7 +24,7 @@ const PersonSchema = new Schema ({
     },
     personality : {
         type : String,
-        enum : ["introvert" , "extrovert" ]
+        enum : ["introvert" , "extrovert" , "ambivert"]
     }
 }
 )
