@@ -12,7 +12,21 @@ router.get("/menue", async (req, res) => {
   }
 });
 
-
+router.get("/menue/:variety", async(req,res)=>{
+  try {
+    const variety = req.params.variety;
+    
+    if(variety=="veg" || variety =="non-veg"){
+      const data = await menue.find({variety : variety});
+      res.status(200).json(data)
+    }else{
+      res.status(404).json("invalid data type")
+    }
+  } catch (error) {
+    console.error("unable to fetched the data");
+    res.status(500).json("Internal server error")
+  }
+})
 
 router.post("/menue", async (req, res) => {
   try {
